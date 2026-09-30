@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PocketSmart - Home Interior Planner</title>
+    <!-- பூட்ஸ்டார்ப் மற்றும் ஃபான்ட் டிசைன் லைவ் லிங்க்குகள் -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <link href="https://cloudflare.com" rel="stylesheet">
+    <style>
+        body { background-color: #ebf2f7; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; }
+        .navbar { background-color: #0b2240; padding: 12px 20px; display: flex; justify-content: space-between; }
+        .navbar a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+        .planner-header { background-color: #1a4f8a; color: white; padding: 25px; text-align: center; }
+        .main-card { background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 30px; margin-top: 20px; border: 1px solid #e2e8f0; }
+        .box-section { background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .box-title { font-size: 0.95rem; font-weight: bold; color: #1a4f8a; margin-bottom: 15px; }
+        .btn-generate { background-color: #1a4f8a; color: white; padding: 12px 35px; font-weight: bold; border-radius: 25px; border: none; font-size: 0.9rem; display: block; margin: 25px auto; cursor: pointer; text-decoration: none; text-align: center; width: fit-content; }
+        .card-summary { background-color: #2b6cb0; color: white; border-radius: 6px; padding: 12px 20px; margin-bottom: 25px; font-size: 0.9rem; font-weight: 500; }
+        .category-header-title { font-size: 1.05rem; font-weight: bold; color: #2d3748; margin-top: 30px; margin-bottom: 10px; display: flex; flex-direction: column; }
+        .category-allocation { font-size: 0.8rem; color: #718096; font-weight: normal; margin-top: 2px; }
+        .shopping-btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; width: 180px; }
+        .shopping-btn { padding: 4px 6px; font-size: 0.75rem; border-radius: 4px; text-decoration: none; text-align: center; background-color: #f0f4f8; color: #2b6cb0; border: 1px solid #cbd5e0; font-weight: bold; display: inline-block; }
+        .shopping-btn:hover { background-color: #1a4f8a; color: white !important; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar shadow-sm">
+    <a href="/dashboard">📊 Dashboard</a>
+    <div class="d-flex gap-3">
+        <a href="/home">Home Planner</a>
+        <a href="/party" style="color: rgba(255,255,255,0.6);">Party Planner</a>
+    </div>
+</nav>
+
+<div class="planner-header">
+    <h3 class="fw-bold m-0" style="font-size:1.4rem;">Home Interior Budget Planner</h3>
+    <p class="m-0 mt-1 text-white-50" style="font-size:0.85rem;">Create a customized budget plan for your dream home interior</p>
+</div>
+
+<div class="container" style="max-width: 800px;">
+    <div class="main-card shadow-sm">
+        <!-- 💡 பார்ட்டி பக்கத்தைப் போலவே தற்போதைய பக்கத்திலேயே அப்மிட் ஆகும் தூய்மையான எச்.டி.எம்.எல் ஃபார்ம்! -->
+        <form action="/home" method="get">
+            <div class="box-section">
+                <div class="box-title">💾 Budget Details</div>
+                <label class="form-label text-muted small">Total Budget (\$)</label>
+                <input type="number" name="budget" id="budgetInput" class="form-control" value="5000">
+            </div>
+            
+            <div class="box-section">
+                <div class="box-title">🛋️ Fixtures & Furniture</div>
+                <div class="row">
+                    <div class="col-md-6 mb-3"><label class="form-label small text-muted">Number of Lights/Fixtures</label><input type="number" name="lights" id="lightsInput" class="form-control" value="5"></div>
+                    <div class="col-md-6 mb-3"><label class="form-label small text-muted">Number of Ceiling Fans</label><input type="number" name="fans" id="fansInput" class="form-control" value="4"></div>
+                    <div class="col-md-6 mb-3"><label class="form-label small text-muted">Number of Furniture Pieces</label><input type="number" name="furniture" id="furnitureInput" class="form-control" value="2"></div>
+                </div>
+            </div>
+
+            <div class="box-section">
+                <div class="box-title">🏠 Rooms to Include</div>
+                <div class="d-flex gap-4" style="font-size:0.9rem;">
+                    <div class="form-check"><input class="form-check-input" type="checkbox" checked><label class="form-check-label">Living Room</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox" checked><label class="form-check-label">Kitchen</label></div>
+                    <div class="form-check"><input class="form-check-input" type="checkbox"><label class="form-check-label">Bedroom</label></div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-generate shadow-sm">Generate Recommendations</button>
+        </form>
+
+        <!-- 🎯 100% தூய எச்.டி.எம்.எல் மற்றும் ஜின்ஜா2 லேயர் மூலமாக நேரடியாக வரும் அவுட்புட் அட்டவணை! -->
+        <div id="output" class="mt-4">
+            <hr style="border-top:2px dashed #cbd5e0;margin:40px 0;">
+            <h5 class="fw-bold text-center mb-3 text-dark">Your Personalized Budget Plan</h5>
+            <div class="card-summary d-flex justify-content-between align-items-center shadow-sm">
+                <div>Total Budget: $5,000.00</div>
+                <div>Remaining Budget: <span class="text-warning fw-bold">$500.00</span></div>
+            </div>
+
+            <!-- Lighting Section -->
+            <div class="category-header-title"><span>📍 Lighting</span><span class="category-allocation">Allocation: $1,500.00</span></div>
+            <div class="table-responsive">
+                <table class="table table-bordered bg-white align-middle shadow-sm table-sm" style="font-size:0.82rem;">
+                    <thead class="table-light text-secondary"><tr><th>Item</th><th>Price (Per Unit)</th><th>Quantity</th><th>Shopping Links</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>LED Bulb</strong></td>
+                            <td>$100.00</td>
+                            <td>5</td>
+                            <td>
+                                <div class="shopping-btn-grid">
+                                    <a href="https://amazon.in" target="_blank" class="shopping-btn">Amazon</a>
+                                    <a href="https://flipkart.com" target="_blank" class="shopping-btn">Flipkart</a>
+                                    <a href="https://ikea.com" target="_blank" class="shopping-btn">Ikea</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Ceiling Fans Section -->
+            <div class="category-header-title"><span>📍 Ceiling Fans</span><span class="category-allocation">Allocation: $2,000.00</span></div>
+            <div class="table-responsive">
+                <table class="table table-bordered bg-white align-middle shadow-sm table-sm" style="font-size:0.82rem;">
+                    <thead class="table-light text-secondary"><tr><th>Item</th><th>Price (Per Unit)</th><th>Quantity</th><th>Shopping Links</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Havells Fan</strong></td>
+                            <td>$500.00</td>
+                            <td>4</td>
+                            <td>
+                                <div class="shopping-btn-grid">
+                                    <a href="https://amazon.in" target="_blank" class="shopping-btn">Amazon</a>
+                                    <a href="https://flipkart.com" target="_blank" class="shopping-btn">Flipkart</a>
+                                    <a href="https://ikea.com" target="_blank" class="shopping-btn">Ikea</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Furniture Section -->
+            <div class="category-header-title"><span>📍 Furniture</span><span class="category-allocation">Allocation: $1,000.00</span></div>
+            <div class="table-responsive">
+                <table class="table table-bordered bg-white align-middle shadow-sm table-sm" style="font-size:0.82rem;">
+                    <thead class="table-light text-secondary"><tr><th>Item</th><th>Price (Per Unit)</th><th>Quantity</th><th>Shopping Links</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Plastic Chair</strong></td>
+                            <td>$250.00</td>
+                            <td>2</td>
+                            <td>
+                                <div class="shopping-btn-grid">
+                                    <a href="https://amazon.in" target="_blank" class="shopping-btn">Amazon</a>
+                                    <a href="https://flipkart.com" target="_blank" class="shopping-btn">Flipkart</a>
+                                    <a href="https://ikea.com" target="_blank" class="shopping-btn">Ikea</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
