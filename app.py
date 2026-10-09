@@ -8,7 +8,7 @@ from pydantic import BaseModel
 
 app = FastAPI(title="PocketSmart: AI Budget Planner Master Engine")
 
-# 🔐 பிரவுசர் பட்டன்கள் பிளாக் ஆகாமல் தடுக்க CORS பாதுகாப்பு செட்டப்
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -17,10 +17,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 👥 பதிவு செய்யப்பட்ட அசல் பயனர்களின் பட்டியல்
+
 registered_users = ["sai", "admin", "user123", "aswathi", "sumathi", "sankari"]
 
-# 🏠 ஹோம் பிளானர் பிரண்ட்எண்ட் ஜாவாஸ்கிரிப்ட் அனுப்பும் மாறிகள் கட்டமைப்பு
+
 class HomeBudgetInput(BaseModel):
     total_budget: float
     num_lights: int = 5
